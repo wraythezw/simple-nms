@@ -9,14 +9,16 @@
 	 */
 	
 	class SimpleNMS{
-		var $agentID="";
+		var $agentID="TMSM-1";
 		var $agentKEY="";
-		var $agentLocation="";
-		var $agentVersion="";
+		var $agentLocation="TMSM";
+		var $agentVersion="0.0.1";
 		
 		var $managerURL="http://196.27.98.10/simple/manager.php";
 		function getListFromManager()
 		{
+			$url= $this->managerURL + "?cmd=gl&uid=" + $this->agentID;
+			$obj = json_decode(file_get_contents($url));
 			
 		}
 		function ping($host)
