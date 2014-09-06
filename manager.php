@@ -35,7 +35,11 @@
 		//			 $hostIP=$HostArray["Host_IP"];
 			//		 $hostServices=$HostArray["Host_Services"];
 				//	 $hostName=$HostArray["Host_Name"];
-					
+				     unset($hostArray[4]);
+				     unset($hostArray[3]);
+				     unset($hostArray[2]);
+					 unset($hostArray[1]);
+					 unset($hostArray[0]);
 					 $HostsData[$x]=$hostArray;
 					 $x=$x+1;
 					}
