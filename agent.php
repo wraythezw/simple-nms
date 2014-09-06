@@ -30,20 +30,28 @@
 					if($cmd=="ping"){
 						// Call ping() on this host
 						$retv=$this->ping($host["Host_IP"]);
-						$str=date("D M j G:i:s T Y") . "\tping():$t" . $host["Host_IP"] . $t . "Ret:" . $retv .  "\n<br>"; // remove BR in production. Purely for http debugging
+						if(!$retv){$retv=0;}
+						$str=date("D M j G:i:s T Y") . "\tping():$t" . $host["Host_IP"] . $t . $retv . "ms" .  "\n<br>"; // remove BR in production. Purely for http debugging
 						echo $str;
 					}
 				}
 			}
 		}
+		function postJSONPingResponse($hostID,$latency)
+		{
+			$url=$this->managerURL . "?cmd=pp&agentKey=" . $this->agentKey . "&Host_ID=" . $hostID . "&Host_Latency=" . $latency;
+			echo $url;
+		}
 		function ping($host)
 		{
-        	exec(sprintf('./ping -c 1 -W 5 %s', escapeshellarg($host)), $res, $rval);
+        	/*exec(sprintf('./ping -c 1 -W 5 %s', escapeshellarg($host)), $res, $rval);
         	if ($rval){
         		return 1;
         	}else{
         		return 0;
-			}
+			}*/
+			exec("./ping -c 1 " . $host . " | head -n 2 | tail -n 1 | awk '{print $7}'", $ping_time);
+			return substr($ping_time[0], 5);
 		}
 		
 	}
