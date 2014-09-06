@@ -31,7 +31,7 @@
 						// Call ping() on this host
 						$retv=$this->ping($host["Host_IP"]);
 						if(!$retv){$retv=0;}
-						$str=date("D M j G:i:s T Y") . "\tping():$t" . $host["Host_IP"] . $t . $retv . "ms" .  "\n<br>"; // remove BR in production. Purely for http debugging
+						$str=date("D M j G:i:s T Y") . "\tping():$t" .  "CustomerID[" . $host['Customer_ID'] . "]" .$t  . $host['Host_Name'] . $t . $host['Host_IP'] . $t . $retv . "ms" .  "\n<br>"; // remove BR in production. Purely for http debugging
 						echo $str;
 					}
 				}
